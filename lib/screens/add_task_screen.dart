@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todoey_flutter/models/tasks.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 
 class AddTaskScreen extends StatefulWidget {
-  final Function addTaskCallback;
-  AddTaskScreen(this.addTaskCallback);
   @override
   State<AddTaskScreen> createState() => _AddTaskScreenState();
 }
@@ -57,7 +56,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                widget.addTaskCallback(newTextValue);
+                Provider.of<TaskData>(context, listen: false)
+                    .addTask(newTextValue);
+                Navigator.pop(context);
               },
             )
           ],
